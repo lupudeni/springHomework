@@ -15,4 +15,6 @@ public interface SingerRepository extends JpaRepository<SingerEntity, Long> {
             "left join fetch s.albums " +
             "order by s.firstName")
     List<SingerEntity> getAll();
+
+    void deleteById(long singerId);
 }

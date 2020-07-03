@@ -66,4 +66,10 @@ public class SingerService {
         existingEntity.setFirstName(singer.getFirstName());
         existingEntity.setLastName(singer.getLastName());
     }
+
+    public void delete(long singerId) {
+        repository.deleteById(singerId);
+    }
+
+
 }
