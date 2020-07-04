@@ -25,6 +25,7 @@ public class SingerService {
 
     private final SingerToSingerEntityMapper singerToSingerEntityMapper;
 
+    @Transactional
     public Singer create(Singer singer) {
         SingerEntity singerEntity = singerToSingerEntityMapper.convert(singer);
         SingerEntity savedEntity = repository.save(singerEntity);
@@ -62,9 +63,17 @@ public class SingerService {
     }
 
     private void updateFields(SingerEntity existingEntity, Singer singer) {
-        existingEntity.setBirthDate(singer.getBirthDate());
-        existingEntity.setFirstName(singer.getFirstName());
-        existingEntity.setLastName(singer.getLastName());
+        if(singer.getBirthDate() != null) {
+            existingEntity.setBirthDate(singer.getBirthDate());
+        }
+
+        if(singer.getFirstName() != null) {
+            existingEntity.setFirstName(singer.getFirstName());
+        }
+
+        if(singer.getLastName() != null) {
+            existingEntity.setLastName(singer.getLastName());
+        }
     }
 
     public void delete(long singerId) {

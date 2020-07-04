@@ -12,11 +12,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AlbumEntityToAlbumMapper implements Converter<AlbumEntity, Album> {
 
+    private ForAlbumSingerEntityToSingerMapper forAlbumSingerEntityToSingerMapper;
+
     @Override
     public Album convert(AlbumEntity source) {
         return Album.builder()
-                    .id(source.getId())
-                    .releaseDate(source.getReleaseDate())
-                    .build();
+                .id(source.getId())
+                .title(source.getTitle())
+                .releaseDate(source.getReleaseDate())
+                .singer(forAlbumSingerEntityToSingerMapper.convert(source.getSinger()))
+                .build();
     }
 }
